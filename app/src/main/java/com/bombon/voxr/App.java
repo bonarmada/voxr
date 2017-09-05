@@ -1,10 +1,10 @@
 package com.bombon.voxr;
 
 
-import com.bombon.voxr.dagger.component.AppComponent;
-import com.bombon.voxr.dagger.component.DaggerAppComponent;
-import com.bombon.voxr.dagger.module.ContextModule;
-import com.bombon.voxr.dagger.module.NetworkModule;
+import com.bombon.voxr.common.dagger.component.AppComponent;
+import com.bombon.voxr.common.dagger.component.DaggerAppComponent;
+import com.bombon.voxr.common.dagger.module.ContextModule;
+import com.bombon.voxr.common.dagger.module.NetworkModule;
 
 /**
  * Created by Vaughn on 6/7/17.

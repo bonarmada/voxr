@@ -1,7 +1,7 @@
-package com.bombon.voxr.dagger.module;
+package com.bombon.voxr.common.dagger.module;
 
 
-import com.bombon.voxr.dagger.scope.AppScope;
+import com.bombon.voxr.common.dagger.scope.AppScope;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

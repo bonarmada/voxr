@@ -3,7 +3,7 @@ package com.bombon.voxr.activity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.bombon.voxr.App;
-import com.bombon.voxr.dagger.component.AppComponent;
+import com.bombon.voxr.common.dagger.component.AppComponent;
 
 /**
  * Created by Vaughn on 8/14/17.

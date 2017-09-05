@@ -1,4 +1,4 @@
-package com.bombon.voxr.dagger.scope;
+package com.bombon.voxr.common.dagger.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

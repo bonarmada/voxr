@@ -1,8 +1,8 @@
-package com.bombon.voxr.dagger.module;
+package com.bombon.voxr.common.dagger.module;
 
 
-import com.bombon.voxr.dagger.remote.PostRemote;
-import com.bombon.voxr.dagger.scope.AppScope;
+import com.bombon.voxr.common.dagger.remote.PostRemote;
+import com.bombon.voxr.common.dagger.scope.AppScope;
 
 import dagger.Module;
 import dagger.Provides;

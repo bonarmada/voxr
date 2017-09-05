@@ -1,4 +1,4 @@
-package com.bombon.voxr.dagger.module;
+package com.bombon.voxr.common.dagger.module;
 
 
 import android.content.Context;

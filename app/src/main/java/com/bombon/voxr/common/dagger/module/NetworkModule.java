@@ -1,9 +1,9 @@
-package com.bombon.voxr.dagger.module;
+package com.bombon.voxr.common.dagger.module;
 
 
 import android.content.Context;
 
-import com.bombon.voxr.dagger.scope.AppScope;
+import com.bombon.voxr.common.dagger.scope.AppScope;
 import com.google.gson.Gson;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;

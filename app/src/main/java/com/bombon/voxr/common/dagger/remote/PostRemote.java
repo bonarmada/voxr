@@ -1,4 +1,4 @@
-package com.bombon.voxr.dagger.remote;
+package com.bombon.voxr.common.dagger.remote;
 
 
 import com.bombon.voxr.model.Post;
