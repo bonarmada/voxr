@@ -35,6 +35,8 @@ dependencies {
     compile 'com.github.jakob-grabner:Circle-Progress-View:v1.3'
     compile 'com.yalantis:eqwaves:1.0.1'
 
+    compile 'com.github.Mahfa:DayNightSwitch:1.2'
+
     /*
      * These are the utility tools
      * dependency injection, http client

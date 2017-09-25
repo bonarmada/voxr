@@ -1,4 +1,4 @@
-package com.bombon.voxr.activity;
+package com.bombon.voxr.fragment;
 
 
 import android.Manifest;
@@ -11,11 +11,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bombon.voxr.R;
+import com.bombon.voxr.activity.MainActivity;
 import com.bombon.voxr.util.AnimUtils;
 import com.bombon.voxr.util.PreferencesUtil;
 import com.yalantis.audio.lib.AudioUtil;
@@ -28,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeActivity extends BaseActivity {
+public class MainFragment extends Fragment {
 
     @Inject
     PreferencesUtil preferencesUtil;
@@ -43,14 +49,13 @@ public class HomeActivity extends BaseActivity {
     CircleProgressView circleProgressView;
 
     @OnClick(R.id.ivRecord)
-    void recordOnClick(){
-        if (isRecording){
-            AnimUtils.ImageViewAnimatedChange(this, ivRecord, ContextCompat.getDrawable(this, R.drawable.ic_mic_black_24dp));
+    void recordOnClick() {
+        if (isRecording) {
+            AnimUtils.ImageViewAnimatedChange(getActivity(), ivRecord, ContextCompat.getDrawable(getActivity(), R.drawable.ic_mic_black_24dp));
             circleProgressView.stopSpinning();
             isRecording = false;
-        }
-        else {
-            AnimUtils.ImageViewAnimatedChange(this, ivRecord, ContextCompat.getDrawable(this, R.drawable.ic_stop_black_24dp));
+        } else {
+            AnimUtils.ImageViewAnimatedChange(getActivity(), ivRecord, ContextCompat.getDrawable(getActivity(), R.drawable.ic_stop_black_24dp));
             circleProgressView.spin();
             isRecording = true;
         }
@@ -70,50 +75,45 @@ public class HomeActivity extends BaseActivity {
     private Thread recordingThread;
     private byte[] buffer;
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, v);
+        ((MainActivity) getActivity()).getComponent().inject(this);
+        return v;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        getComponent().inject(this);
-
-        // Stuffs
-        this.setTitle("");
-
-
-        mHorizon = new Horizon(glSurfaceView, getResources().getColor(R.color.charcoal),
+        mHorizon = new Horizon(glSurfaceView, ContextCompat.getColor(getActivity(), R.color.charcoal),
                 RECORDER_SAMPLE_RATE, RECORDER_CHANNELS, RECORDER_ENCODING_BIT);
         mHorizon.setMaxVolumeDb(MAX_DECIBELS);
-
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        checkPermissionsAndStart();
-    }
-
-    @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         glSurfaceView.onResume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         glSurfaceView.onPause();
-    }
+        isRecording = false;
 
-    @Override
-    protected void onStop() {
-        super.onStop();
         if (audioRecord != null) {
             audioRecord.release();
         }
         AudioUtil.disposeProcessor();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -125,15 +125,15 @@ public class HomeActivity extends BaseActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     checkPermissionsAndStart();
                 } else {
-                    finish();
+                    getActivity().finish();
                 }
         }
 
     }
 
     private void checkPermissionsAndStart() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},
                     REQUEST_PERMISSION_RECORD_AUDIO);
         } else {
             initRecorder();
@@ -193,4 +193,5 @@ public class HomeActivity extends BaseActivity {
             }
         }
     };
+
 }

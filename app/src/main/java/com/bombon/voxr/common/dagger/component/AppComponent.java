@@ -1,10 +1,11 @@
 package com.bombon.voxr.common.dagger.component;
 
 
-import com.bombon.voxr.activity.HomeActivity;
 import com.bombon.voxr.common.dagger.module.PrefsModule;
 import com.bombon.voxr.common.dagger.module.RemoteModule;
 import com.bombon.voxr.common.dagger.scope.AppScope;
+import com.bombon.voxr.fragment.HistoryFragment;
+import com.bombon.voxr.fragment.MainFragment;
 
 import dagger.Component;
 
@@ -16,5 +17,6 @@ import dagger.Component;
 @Component(modules = {RemoteModule.class, PrefsModule.class})
 
 public interface AppComponent {
-    void inject(HomeActivity activity);
+    void inject(MainFragment fragment);
+    void inject(HistoryFragment fragment);
 }
