@@ -24,6 +24,9 @@ import com.bombon.voxr.R;
 import com.bombon.voxr.activity.MainActivity;
 import com.bombon.voxr.util.AnimUtils;
 import com.bombon.voxr.util.PreferencesUtil;
+import com.majeur.cling.Cling;
+import com.majeur.cling.ClingManager;
+import com.majeur.cling.ViewTarget;
 import com.yalantis.audio.lib.AudioUtil;
 import com.yalantis.waves.util.Horizon;
 
@@ -74,6 +77,8 @@ public class MainFragment extends Fragment {
     private AudioRecord audioRecord;
     private Thread recordingThread;
     private byte[] buffer;
+
+    private ClingManager mClingManager;
 
     @Nullable
     @Override
@@ -193,5 +198,57 @@ public class MainFragment extends Fragment {
             }
         }
     };
+
+    public void showHelpOverlay(){
+
+        mClingManager = new ClingManager(getActivity());
+
+        // When no Target is set, Target.NONE is used
+        mClingManager.addCling(new Cling.Builder(getActivity())
+                .setTitle("Welcome to this app")
+                .setContent("This application is meant to be the best app you will ever try on android.")
+                .build());
+
+
+        // Target: Record Button
+        mClingManager.addCling(new Cling.Builder(getActivity())
+                .setTarget(new ViewTarget(circleProgressView))
+                .setTitle("This is the recording button")
+                .setContent("It lets you do stuff.")
+                .build());
+
+
+        mClingManager.setCallbacks(new ClingManager.Callbacks() {
+            @Override
+            public boolean onClingClick(int position) {
+                // We return false to tell to cling manager that we didn't handle this,
+                // so it can perform the default action (ie. showing the next Cling).
+                // This is the default value returned by super.onClingClick(position), so
+                // in a real project, we would just leave this method unoverriden.
+                return false;
+            }
+
+            @Override
+            public void onClingShow(int position) {
+//                Toast.makeText(MyActivity.this, "Cling #" + position + " is shown", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onClingHide(int position) {
+//                Toast.makeText(MyActivity.this, "Cling #" + position + " is hidden", Toast.LENGTH_SHORT).show();
+//
+//                // Last Cling has been shown, tutorial is ended.
+//                if (position == 2) {
+//                    mSharedPreferences.edit()
+//                            .putBoolean(START_TUTORIAL_KEY, false)
+//                            .apply();
+//
+//                    mClingManager = null;
+//                }
+            }
+        });
+
+        mClingManager.start();
+    }
 
 }

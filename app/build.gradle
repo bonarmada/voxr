@@ -36,6 +36,7 @@ dependencies {
     compile 'com.yalantis:eqwaves:1.0.1'
 
     compile 'com.github.Mahfa:DayNightSwitch:1.2'
+    compile 'com.majeur.cling:cling:1.1'
 
     /*
      * These are the utility tools

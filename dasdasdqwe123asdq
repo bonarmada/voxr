@@ -1,0 +1,42 @@
+[33mcommit 3ba48bc6f223c0637195c097adeb4ff4ae61a5e4[m
+Author: Vaughn Armada <bonarmada@gmail.com>
+Date:   Mon Sep 25 21:33:28 2017 +0800
+
+    Added fragments, fixed bug when dealing with recreate method
+
+[33mcommit dbbfa3063f4a9c8ad6ff956c697517ee134a50ef[m
+Author: Vaughn Armada <bonarmada@gmail.com>
+Date:   Tue Sep 5 21:03:39 2017 +0800
+
+    Fixed folder structure, added drwaer layout
+
+[33mcommit 6701f81446258094fe3be0a51487fb0eeb1d8051[m
+Merge: 93ebb6c 5596900
+Author: Vaughn Armada <bonarmada@gmail.com>
+Date:   Thu Aug 17 15:51:25 2017 +0800
+
+    Merge branch 'master' of https://github.com/bonarmada/voxr
+
+[33mcommit 93ebb6cebb3275a7409ea233d4f30d42b0e59884[m
+Author: Vaughn Armada <bonarmada@gmail.com>
+Date:   Thu Aug 17 15:51:02 2017 +0800
+
+    UI for main page
+
+[33mcommit 5596900ab4a5e11b331b268417f474c3c033612f[m
+Author: Vaughn Armada <bonarmada@gmail.com>
+Date:   Fri Jul 14 20:38:54 2017 +0800
+
+    Create README.md
+
+[33mcommit 10b6c294cdf4a3106aff8ce27174747c0a3e5dec[m
+Author: Vaughn Armada <bonarmada@gmail.com>
+Date:   Fri Jul 14 20:30:23 2017 +0800
+
+    init dependency injection
+
+[33mcommit bd28f328ebfab08c457cdf25b6f8f6d113418b6f[m
+Author: tir.vaughn <vaughn@tirsolutions.com>
+Date:   Fri Jul 14 20:13:48 2017 +0800
+
+    initial commit

@@ -16,11 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bombon.voxr.R;
+import com.bombon.voxr.fragment.AboutFragment;
 import com.bombon.voxr.fragment.HistoryFragment;
 import com.bombon.voxr.fragment.MainFragment;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchAnimListener;
 import com.mahfa.dnswitch.DayNightSwitchListener;
+import com.majeur.cling.Cling;
+import com.majeur.cling.ClingManager;
+import com.majeur.cling.ViewTarget;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +68,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         setupToolbar();
         setupDrawer();
+        setupNavigationView();
 
         changeFragment(new MainFragment());
     }
@@ -98,7 +103,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+    }
 
+    private void setupNavigationView() {
         // Navigation Item Default State
         navigationView.getMenu().getItem(0).setChecked(true);
 
@@ -169,19 +176,30 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 Log.e(TAG, "HOME");
                 break;
             case R.id.nav_history:
-                changeFragment(new HistoryFragment(), false);
                 Log.e(TAG, "HISTORY");
+                changeFragment(new HistoryFragment(), false);
                 break;
             case R.id.nav_help:
                 Log.e(TAG, "HELP");
+                navigationView.setCheckedItem(R.id.nav_home);
+                showHelpOverlay();
                 break;
             case R.id.nav_about:
                 Log.e(TAG, "ABOUT");
+                changeFragment(new AboutFragment(), false);
                 break;
             default:
                 return false;
         }
         return false;
+    }
+
+    private void showHelpOverlay() {
+        Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.fragment_frame);
+        if (f instanceof MainFragment){
+            ((MainFragment)f).showHelpOverlay();
+        }
+
     }
 
     @Override
