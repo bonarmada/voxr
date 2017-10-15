@@ -1,7 +1,7 @@
 package com.bombon.voxr.common.dagger.module;
 
 
-import com.bombon.voxr.common.dagger.remote.PostRemote;
+import com.bombon.voxr.common.dagger.remote.UserRemote;
 import com.bombon.voxr.common.dagger.scope.AppScope;
 
 import dagger.Module;
@@ -16,7 +16,7 @@ import retrofit2.Retrofit;
 public class RemoteModule {
     @Provides
     @AppScope
-    PostRemote providePostRemote(Retrofit retrofit){
-        return retrofit.create(PostRemote.class);
+    UserRemote provideUserRemote(Retrofit retrofit) {
+        return retrofit.create(UserRemote.class);
     }
 }

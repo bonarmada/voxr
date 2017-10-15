@@ -37,7 +37,7 @@ public class NetworkModule {
             public void log(String message) {
                 Timber.i("OkHttp", message);
             }
-        });
+        }).setLevel(HttpLoggingInterceptor.Level.BASIC);
     }
 
 
@@ -68,7 +68,7 @@ public class NetworkModule {
 
     @Provides
     @AppScope
-    OkHttp3Downloader provideOkHttpDownloader(OkHttpClient okHttpClient){
+    OkHttp3Downloader provideOkHttpDownloader(OkHttpClient okHttpClient) {
         return new OkHttp3Downloader(okHttpClient);
     }
 }
