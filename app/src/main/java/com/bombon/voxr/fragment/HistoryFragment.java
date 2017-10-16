@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import com.bombon.voxr.R;
 import com.bombon.voxr.activity.MainActivity;
 import com.bombon.voxr.adapter.HistoryAdapter;
+import com.bombon.voxr.service.RecordService;
+import com.bombon.voxr.service.UserService;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +25,11 @@ import butterknife.ButterKnife;
  */
 
 public class HistoryFragment extends Fragment {
+
+    @Inject
+    UserService userService;
+    @Inject
+    RecordService recordService;
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;

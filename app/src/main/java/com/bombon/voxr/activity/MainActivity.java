@@ -22,9 +22,6 @@ import com.bombon.voxr.fragment.MainFragment;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchAnimListener;
 import com.mahfa.dnswitch.DayNightSwitchListener;
-import com.majeur.cling.Cling;
-import com.majeur.cling.ClingManager;
-import com.majeur.cling.ViewTarget;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +61,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onStart() {
         super.onStart();
-
 
         setupToolbar();
         setupDrawer();

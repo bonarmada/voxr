@@ -1,6 +1,7 @@
 package com.bombon.voxr.activity;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,21 +28,45 @@ import com.mahfa.dnswitch.DayNightSwitchAnimListener;
 import com.mahfa.dnswitch.DayNightSwitchListener;
 
 import butterknife.BindView;
+=======
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
+import com.bombon.voxr.R;
+import com.bombon.voxr.model.User;
+import com.bombon.voxr.service.ServiceCallback;
+import com.bombon.voxr.service.UserService;
+
+import javax.inject.Inject;
+
+>>>>>>> abc5ca272fb60f8cf32fae78cfe8385dab5d69aa
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+<<<<<<< HEAD
  * Created by Vaughn on 9/5/17.
  */
 
 public class LoginActivity extends BaseActivity{
     private final String TAG = this.getClass().getSimpleName();
+=======
+ * Created by Vaughn on 8/14/17.
+ */
+
+public class LoginActivity extends BaseActivity {
+    private static final String TAG = LoginActivity.class.getSimpleName();
+
+    @Inject
+    UserService userService;
+>>>>>>> abc5ca272fb60f8cf32fae78cfe8385dab5d69aa
 
     @OnClick(R.id.btn_login)
     void loginOnClick(){
         login();
     }
 
+<<<<<<< HEAD
     @BindView(R.id.btn_login)
     Button btnLogin;
 
@@ -56,10 +81,15 @@ public class LoginActivity extends BaseActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+=======
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+>>>>>>> abc5ca272fb60f8cf32fae78cfe8385dab5d69aa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+<<<<<<< HEAD
     }
 
     private void login(){
@@ -83,5 +113,24 @@ public class LoginActivity extends BaseActivity{
             return false;
         }
         return true;
+=======
+        // Dagger init
+        getComponent().inject(this);
+
+        // Stuffs
+        if (userService.isLoggedIn())
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    }
+
+    private void login() {
+        userService.login(new User("bon", "bon"), new ServiceCallback<User>() {
+            @Override
+            public void getResult(int statusCode, User result) {
+                if (statusCode == 200){
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                }
+            }
+        });
+>>>>>>> abc5ca272fb60f8cf32fae78cfe8385dab5d69aa
     }
 }
