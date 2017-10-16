@@ -1,0 +1,57 @@
+package com.bombon.voxr.service;
+
+import com.bombon.voxr.common.dagger.remote.RecordRemote;
+import com.bombon.voxr.dao.RecordDao;
+import com.bombon.voxr.dao.UserDao;
+import com.bombon.voxr.model.Record;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
+
+/**
+ * Created by Vaughn on 10/16/17.
+ */
+
+
+public class RecordService {
+    private static final String TAG = RecordService.class.getSimpleName();
+
+    private static RecordRemote remote;
+    private static RecordDao dao;
+    private static UserDao userDao;
+
+    @Inject
+    public RecordService(RecordRemote remote, RecordDao dao) {
+        this.remote = remote;
+        this.dao = dao;
+    }
+
+    public static void get(int userId, final ServiceCallback callback){
+        remote.get(userId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Response<Record>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Response<Record>> responses) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+    }
+}

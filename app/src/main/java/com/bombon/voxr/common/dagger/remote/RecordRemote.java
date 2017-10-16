@@ -16,9 +16,12 @@ import retrofit2.http.Path;
 
 public interface RecordRemote {
     @GET("users/{user_id}/records")
-    List<Single<Response<Record>>> getByUser(@Path("user_id") int userId);
+    Single<List<Response<Record>>> get(@Path("user_id") int userId);
+
+    @GET("users/{user_id}/records/{record_id}")
+    Single<List<Response<Record>>> getById(@Path("user_id") int userId , @Path("record_id") int recordId);
 
     @POST("users/{user_id}/records")
     Single<Response> createRecord(@Path("user_id") int userId);
-
 }
+
