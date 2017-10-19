@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/navigation_header_height">
+    android:layout_height="@dimen/navigation_header_height"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/name"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vaughn Armada" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/username"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bonbon" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_signout"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Sign out"
+            android:textColor="@android:color/holo_red_dark" />
+    </LinearLayout>
 
     <com.mahfa.dnswitch.DayNightSwitch
         android:id="@+id/toggle_dark_mode"
@@ -17,5 +47,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/charcoal"></View>
+        android:background="@color/bgDark"></View>
 </RelativeLayout>

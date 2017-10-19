@@ -35,7 +35,7 @@ public class NetworkModule {
         return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Timber.i("OkHttp", message);
+                Timber.tag("OkHttp").d(message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BASIC);
     }

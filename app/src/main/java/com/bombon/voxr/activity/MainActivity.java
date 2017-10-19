@@ -1,5 +1,7 @@
 package com.bombon.voxr.activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,14 +16,19 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bombon.voxr.R;
 import com.bombon.voxr.fragment.AboutFragment;
 import com.bombon.voxr.fragment.HistoryFragment;
 import com.bombon.voxr.fragment.MainFragment;
+import com.bombon.voxr.service.UserService;
+import com.bombon.voxr.util.Util;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchAnimListener;
 import com.mahfa.dnswitch.DayNightSwitchListener;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +39,9 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentManager.OnBackStackChangedListener {
     private final String TAG = this.getClass().getSimpleName();
+
+    @Inject
+    UserService userService;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -155,6 +165,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             }
         });
+
+
+        // User Profile
+        headerViewHolder.btnSignout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+    }
+
+    private void signOut() {
+        Util.displayAlert(this, null, "Are you sure you want to sign out?", "Sign out", "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                userService.logout();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
     }
 
 
@@ -192,8 +222,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void showHelpOverlay() {
         Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.fragment_frame);
-        if (f instanceof MainFragment){
-            ((MainFragment)f).showHelpOverlay();
+        if (f instanceof MainFragment) {
+            ((MainFragment) f).showHelpOverlay();
         }
 
     }
@@ -205,8 +235,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (current instanceof MainFragment) {
             drawerToggle.setDrawerIndicatorEnabled(true);
             navigationView.setCheckedItem(R.id.nav_home);
-        }
-        else{
+        } else {
             drawerToggle.setDrawerIndicatorEnabled(false);
         }
     }
@@ -214,6 +243,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected static class HeaderViewHolder {
         @BindView(R.id.toggle_dark_mode)
         DayNightSwitch toggleDarkMode;
+
+        @BindView(R.id.name)
+        TextView tvName;
+
+        @BindView(R.id.username)
+        TextView tvUsername;
+
+        @BindView(R.id.btn_signout)
+        TextView btnSignout;
 
         HeaderViewHolder(View view) {
             ButterKnife.bind(this, view);

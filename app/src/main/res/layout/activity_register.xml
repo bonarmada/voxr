@@ -16,14 +16,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/bg_lh" />
 
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/logo_emoti" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,8 +28,7 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="#55FFFFFF"
             android:drawableLeft="@drawable/ic_person_outline_black_16dp"
             android:drawablePadding="16dp"
@@ -58,6 +49,7 @@
             android:background="#55FFFFFF"
             android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
             android:drawablePadding="16dp"
+            android:layout_marginBottom="8dp"
             android:drawableTint="@color/textColorWhite"
             android:hint="Password"
             android:imeOptions="actionNext"
@@ -68,32 +60,65 @@
             android:textColor="@color/textColorWhite"
             android:textColorHint="@color/textColorWhite" />
 
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="#55FFFFFF"
+            android:hint="First Name"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:singleLine="true"
+            android:textColor="@color/textColorWhite"
+            android:textColorHint="@color/textColorWhite" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="#55FFFFFF"
+            android:hint="Last Name"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:singleLine="true"
+            android:textColor="@color/textColorWhite"
+            android:textColorHint="@color/textColorWhite" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="#55FFFFFF"
+            android:drawableTint="@color/textColorWhite"
+            android:hint="Email Address"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:singleLine="true"
+            android:textColor="@color/textColorWhite"
+            android:textColorHint="@color/textColorWhite" />
+
         <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:text="Log in"
+            android:text="Create Account"
             android:textColor="@color/textColorWhiteSecondary"
-
+            android:layout_marginBottom="16dp"
             app:spinning_bar_color="@color/textColorWhite"
             app:spinning_bar_padding="6dp"
             app:spinning_bar_width="2dp" />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_register"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:text="Create account"
-            android:textColor="@color/textColorWhiteSecondary" />
 
     </LinearLayout>
 

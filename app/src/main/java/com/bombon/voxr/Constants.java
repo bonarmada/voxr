@@ -6,7 +6,7 @@ package com.bombon.voxr;
 
 public class Constants {
 
-    public static final String BASE_URL = "http://10.0.2.2:5001/voxr/api/";
+    public static final String BASE_URL = "http://54.169.44.247:5001/voxr/api/";
 
     public interface Config{
         Integer TIMEOUT_MS = 15000;

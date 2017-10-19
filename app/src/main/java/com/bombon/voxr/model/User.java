@@ -19,6 +19,14 @@ public class User extends RealmObject {
         this.password = password;
     }
 
+    public User(String email, String firstName, String lastName, String username, String password) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
     @SerializedName("email")
     @Expose
     public String email;

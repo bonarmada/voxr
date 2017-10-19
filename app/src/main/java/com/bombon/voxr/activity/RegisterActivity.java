@@ -1,18 +1,19 @@
 package com.bombon.voxr.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.bombon.voxr.R;
 import com.bombon.voxr.model.User;
-import com.bombon.voxr.util.ErrorCode;
-import com.bombon.voxr.util.ServiceCallback;
 import com.bombon.voxr.service.UserService;
+import com.bombon.voxr.util.ErrorCode;
+import com.bombon.voxr.util.ErrorUtils;
+import com.bombon.voxr.util.ServiceCallback;
+import com.bombon.voxr.util.Util;
 
 import javax.inject.Inject;
 
@@ -27,27 +28,19 @@ import timber.log.Timber;
  * Created by Vaughn on 9/5/17.
  */
 
-public class LoginActivity extends BaseActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
+public class RegisterActivity extends BaseActivity {
+    private static final String TAG = RegisterActivity.class.getSimpleName();
 
     @Inject
     UserService userService;
 
-    @OnClick(R.id.btn_login)
-    void loginOnClick() {
-        login();
-    }
+    @Inject
+    ErrorUtils errorUtils;
 
     @OnClick(R.id.btn_register)
     void registerOnClick() {
         register();
     }
-
-    @BindView(R.id.btn_login)
-    CircularProgressButton btnLogin;
-
-    @BindView(R.id.btn_register)
-    Button btnRegister;
 
     @BindView(R.id.username)
     EditText etUsername;
@@ -55,51 +48,62 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.password)
     EditText etPassword;
 
+    @BindView(R.id.first_name)
+    EditText etFirstName;
+
+    @BindView(R.id.last_name)
+    EditText etLastName;
+
+    @BindView(R.id.email)
+    EditText etEmail;
+
+    @BindView(R.id.btn_register)
+    CircularProgressButton btnRegister;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
 
         // Dagger init
         getComponent().inject(this);
-
-        // Stuffs
-        if (userService.isLoggedIn())
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 
-    private void login() {
+    private void register() {
         if (!isValid())
             return;
 
         // Valid text fields
-        btnLogin.revertAnimation(new OnAnimationEndListener() {
+        btnRegister.revertAnimation(new OnAnimationEndListener() {
             @Override
             public void onAnimationEnd() {
-                btnLogin.setText("Login");
+                btnRegister.setText("Create Account");
             }
         });
-        btnLogin.startAnimation();
-        userService.login(new User(etUsername.getText().toString(), etPassword.getText().toString()), new ServiceCallback<User>() {
+        btnRegister.startAnimation();
+
+        userService.register(new User(etEmail.getText().toString(), etFirstName.getText().toString(), etLastName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString()), new ServiceCallback() {
             @Override
-            public void onSuccess(int statusCode, User result) {
-                btnLogin.revertAnimation();
-                if (statusCode == 200)
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            public void onSuccess(int statusCode, Object result) {
+                btnRegister.revertAnimation();
+                if (statusCode == 201)
+                    Util.displayAlert(RegisterActivity.this, "Registration Succesfull", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
             }
 
             @Override
             public void onError(ErrorCode code, String message) {
-                btnLogin.revertAnimation();
+                btnRegister.revertAnimation();
                 Timber.tag(TAG).d(message);
                 showNetworkError(message);
             }
         });
-    }
-
-    private void register() {
-        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
     private void showNetworkError(String e) {
@@ -119,6 +123,21 @@ public class LoginActivity extends BaseActivity {
             etPassword.requestFocus();
             return false;
         }
+        if (etEmail.getText().toString().isEmpty()) {
+            etEmail.setError(getString(R.string.error_field_required));
+            etEmail.requestFocus();
+            return false;
+        }
+        if (etFirstName.getText().toString().isEmpty()) {
+            etFirstName.setError(getString(R.string.error_field_required));
+            etFirstName.requestFocus();
+            return false;
+        }
+        if (etLastName.getText().toString().isEmpty()) {
+            etLastName.setError(getString(R.string.error_field_required));
+            etLastName.requestFocus();
+            return false;
+        }
         return true;
     }
 
@@ -126,6 +145,6 @@ public class LoginActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        btnLogin.dispose();
+        btnRegister.dispose();
     }
 }

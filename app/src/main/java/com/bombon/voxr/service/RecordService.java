@@ -2,8 +2,8 @@ package com.bombon.voxr.service;
 
 import com.bombon.voxr.common.dagger.remote.RecordRemote;
 import com.bombon.voxr.dao.RecordDao;
-import com.bombon.voxr.dao.UserDao;
 import com.bombon.voxr.model.Record;
+import com.bombon.voxr.util.ServiceCallback;
 
 import java.util.List;
 
@@ -26,7 +26,6 @@ public class RecordService {
 
     private static RecordRemote remote;
     private static RecordDao dao;
-    private static UserDao userDao;
 
     @Inject
     public RecordService(RecordRemote remote, RecordDao dao) {
