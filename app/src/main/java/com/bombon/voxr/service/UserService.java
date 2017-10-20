@@ -15,9 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.HttpException;
 import retrofit2.Response;
-import timber.log.Timber;
 
 /**
  * Created by Vaughn on 10/16/17.
@@ -71,14 +69,15 @@ public class UserService {
     public static void register(final User user, final ServiceCallback callback) {
         remote.register(user).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response>() {
+                .subscribe(new SingleObserver<Response<User>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response response) {
+                    public void onSuccess(@NonNull Response<User> response) {
+                        Log.e(TAG, response.code()+"");
                         if (response.code() == 201) {
                             callback.onSuccess(response.code(), null);
                             return;
@@ -91,6 +90,10 @@ public class UserService {
                             callback.onError(ErrorCode.BAD_REQUEST, response.message());
                             return;
                         }
+                        if (response.code() == 500) {
+                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
+                            return;
+                        }
                     }
 
                     @Override
@@ -99,7 +102,6 @@ public class UserService {
                     }
                 });
     }
-
 
     public static void logout() {
         dao.clear();

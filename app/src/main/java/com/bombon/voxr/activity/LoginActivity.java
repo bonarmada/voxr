@@ -1,18 +1,17 @@
 package com.bombon.voxr.activity;
 
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.bombon.voxr.R;
 import com.bombon.voxr.model.User;
+import com.bombon.voxr.service.UserService;
 import com.bombon.voxr.util.ErrorCode;
 import com.bombon.voxr.util.ServiceCallback;
-import com.bombon.voxr.service.UserService;
+import com.bombon.voxr.util.Util;
 
 import javax.inject.Inject;
 
@@ -103,9 +102,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void showNetworkError(String e) {
-        Snackbar.make(findViewById(R.id.container),
-                "e",
-                Snackbar.LENGTH_LONG);
+        Util.displayAlert(this, e, null);
     }
 
     private boolean isValid() {

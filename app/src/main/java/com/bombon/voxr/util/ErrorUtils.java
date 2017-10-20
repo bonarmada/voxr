@@ -21,7 +21,7 @@ public class ErrorUtils {
 
     @Inject
     public ErrorUtils(Retrofit retrofit) {
-        this.retrofit = retrofit
+        this.retrofit = retrofit;
     }
 
     public static ApiError parseError(Response<?> response) {
