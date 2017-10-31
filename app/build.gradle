@@ -44,6 +44,11 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
 
+    // ExoPLayer
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.4'
+    compile 'com.google.android.exoplayer:exoplayer-ui:r2.5.4'
+
+
     /*
      * These are the utility tools
      * dependency injection, http client
@@ -80,6 +85,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
 
     // Stuff
+
 
     testCompile 'junit:junit:4.12'
 }

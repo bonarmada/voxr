@@ -9,7 +9,8 @@
         android:id="@+id/emoji"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:padding="8dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/timestamp"
@@ -31,10 +32,15 @@
         android:layout_toRightOf="@id/emoji"
         android:text="Happy" />
 
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="@dimen/item_history_button_dimen"
-        android:layout_height="@dimen/item_history_button_dimen"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_play_arrow_black_24dp" />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_play"
+        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/emoji"
+        android:src="@drawable/ic_play_arrow_black_24dp"
+        android:text="Play"
+        android:textColorHint="@color/bgDark" />
 
 </RelativeLayout>
