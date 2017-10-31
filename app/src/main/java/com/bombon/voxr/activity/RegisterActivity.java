@@ -1,17 +1,14 @@
 package com.bombon.voxr.activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.widget.EditText;
 
 import com.bombon.voxr.R;
 import com.bombon.voxr.model.User;
 import com.bombon.voxr.service.UserService;
 import com.bombon.voxr.util.ErrorCode;
-import com.bombon.voxr.util.ErrorUtils;
 import com.bombon.voxr.util.ServiceCallback;
 import com.bombon.voxr.util.Util;
 
@@ -86,7 +83,7 @@ public class RegisterActivity extends BaseActivity {
             public void onSuccess(int statusCode, Object result) {
                 btnRegister.revertAnimation();
                 if (statusCode == 201)
-                    Util.displayAlert(RegisterActivity.this, "Registration Succesfull", new DialogInterface.OnClickListener() {
+                    Util.displayAlert(RegisterActivity.this, "Registration Succesful", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
@@ -104,9 +101,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void showNetworkError(String e) {
-        Snackbar.make(findViewById(R.id.container),
-                "e",
-                Snackbar.LENGTH_LONG);
+        Util.displayAlert(this, e, null);
     }
 
     private boolean isValid() {

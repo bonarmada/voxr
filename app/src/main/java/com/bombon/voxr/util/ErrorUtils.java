@@ -19,7 +19,6 @@ public class ErrorUtils {
 
     private static Retrofit retrofit;
 
-
     public static ApiError parseError(Response<?> response) {
         Converter<ResponseBody, ApiError> converter =
                 retrofit.responseBodyConverter(ApiError.class, new Annotation[0]);

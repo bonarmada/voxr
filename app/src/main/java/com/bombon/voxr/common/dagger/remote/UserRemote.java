@@ -16,5 +16,5 @@ public interface UserRemote {
     Single<Response<User>> login(@Body User user);
 
     @POST("users")
-    Single<Response> register(@Body User user);
+    Single<Response<User>> register(@Body User user);
 }
