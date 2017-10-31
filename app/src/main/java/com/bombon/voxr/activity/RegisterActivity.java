@@ -34,9 +34,6 @@ public class RegisterActivity extends BaseActivity {
     @Inject
     UserService userService;
 
-    @Inject
-    ErrorUtils errorUtils;
-
     @OnClick(R.id.btn_register)
     void registerOnClick() {
         register();

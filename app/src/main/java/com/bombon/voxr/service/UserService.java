@@ -36,12 +36,6 @@ public class UserService {
         this.dao = dao;
     }
 
-    public static boolean isLoggedIn() {
-        if (dao.profile() == null)
-            return false;
-        return true;
-    }
-
     public static void login(final User user, final ServiceCallback callback) {
         remote.login(user).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -101,6 +95,16 @@ public class UserService {
     }
 
 
+
+    public static boolean isLoggedIn() {
+        if (dao.profile() == null)
+            return false;
+        return true;
+    }
+
+    public static User getLoggedIn(){
+        return dao.profile();
+    }
     public static void logout() {
         dao.clear();
     }

@@ -33,18 +33,22 @@ public class RecordService {
         this.dao = dao;
     }
 
-    public static void get(int userId, final ServiceCallback callback){
+    public static void get(int userId, final ServiceCallback callback) {
         remote.get(userId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<Response<Record>>>() {
+                .subscribe(new SingleObserver<Response<List<Record>>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull List<Response<Record>> responses) {
-
+                    public void onSuccess(@NonNull Response<List<Record>> listResponse) {
+                        if (listResponse.code() == 200) {
+                            dao.save(listResponse.body());
+                            callback.onSuccess(listResponse.code(), dao.get());
+                            return;
+                        }
                     }
 
                     @Override

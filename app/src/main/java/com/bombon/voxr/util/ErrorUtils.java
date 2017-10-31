@@ -19,10 +19,6 @@ public class ErrorUtils {
 
     private static Retrofit retrofit;
 
-    @Inject
-    public ErrorUtils(Retrofit retrofit) {
-        this.retrofit = retrofit
-    }
 
     public static ApiError parseError(Response<?> response) {
         Converter<ResponseBody, ApiError> converter =

@@ -25,6 +25,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         this.records = records;
     }
 
+    public void refresh(List<Record> records){
+        this.records = records;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false);
@@ -38,7 +43,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 32;
+        return records.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
