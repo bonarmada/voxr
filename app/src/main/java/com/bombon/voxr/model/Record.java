@@ -26,6 +26,9 @@ public class Record extends RealmObject {
     @SerializedName("file_path")
     @Expose
     private String filePath;
+    @SerializedName("user_emotion")
+    @Expose
+    private String userEmotion;
 
     public String getDateCreated() {
         return dateCreated;
@@ -58,4 +61,39 @@ public class Record extends RealmObject {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getUserEmotion() {
+        return userEmotion;
+    }
+
+    public void setUserEmotion(String userEmotion) {
+        this.userEmotion = userEmotion;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "id=" + id +
+                ", dateCreated='" + dateCreated + '\'' +
+                ", emotion=" + emotion +
+                ", filePath='" + filePath + '\'' +
+                ", userEmotion='" + userEmotion + '\'' +
+                '}';
+    }
+
+    public String getEmotionResult() {
+        if (getUserEmotion().equals("anger"))
+            return EmotionEnum.ANGER;
+        if (getUserEmotion().equals("fear"))
+            return EmotionEnum.FEAR;
+        if (getUserEmotion().equals("happiness"))
+            return EmotionEnum.HAPPY;
+        if (getUserEmotion().equals("neutrality"))
+            return EmotionEnum.NEUTRAL;
+        if (getUserEmotion().equals("sadness"))
+            return EmotionEnum.SAD;
+        else
+            return null;
+    }
+
 }

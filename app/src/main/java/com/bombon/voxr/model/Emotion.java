@@ -1,7 +1,13 @@
 package com.bombon.voxr.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import io.realm.RealmObject;
 
@@ -10,23 +16,23 @@ import io.realm.RealmObject;
  */
 
 
-public class Emotion extends RealmObject{
+public class Emotion extends RealmObject {
 
     @SerializedName("anger")
     @Expose
     private Double anger;
     @SerializedName("fear")
     @Expose
-    private Integer fear;
+    private Double fear;
     @SerializedName("happiness")
     @Expose
     private Double happiness;
     @SerializedName("neutrality")
     @Expose
-    private Integer neutrality;
+    private Double neutrality;
     @SerializedName("sadness")
     @Expose
-    private Integer sadness;
+    private Double sadness;
 
     public Double getAnger() {
         return anger;
@@ -36,11 +42,11 @@ public class Emotion extends RealmObject{
         this.anger = anger;
     }
 
-    public Integer getFear() {
+    public Double getFear() {
         return fear;
     }
 
-    public void setFear(Integer fear) {
+    public void setFear(Double fear) {
         this.fear = fear;
     }
 
@@ -52,20 +58,30 @@ public class Emotion extends RealmObject{
         this.happiness = happiness;
     }
 
-    public Integer getNeutrality() {
+    public Double getNeutrality() {
         return neutrality;
     }
 
-    public void setNeutrality(Integer neutrality) {
+    public void setNeutrality(Double neutrality) {
         this.neutrality = neutrality;
     }
 
-    public Integer getSadness() {
+    public Double getSadness() {
         return sadness;
     }
 
-    public void setSadness(Integer sadness) {
+    public void setSadness(Double sadness) {
         this.sadness = sadness;
     }
 
+    @Override
+    public String toString() {
+        return "Emotion{" +
+                "anger=" + anger +
+                ", fear=" + fear +
+                ", happiness=" + happiness +
+                ", neutrality=" + neutrality +
+                ", sadness=" + sadness +
+                '}';
+    }
 }

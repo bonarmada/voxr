@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.ArrayMap;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -69,10 +70,11 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, List<Record> result) {
                 Log.e(TAG, statusCode + "");
-                if (statusCode == 200){
+                if (statusCode == 200) {
                     adapter.refresh(result);
                 }
             }
+
             @Override
             public void onError(ErrorCode code, String message) {
 
@@ -82,9 +84,13 @@ public class HistoryFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        adapter = new HistoryAdapter(records);
+        adapter = new HistoryAdapter(getActivity(), records);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(
+                getActivity(),
+                DividerItemDecoration.VERTICAL)
+        );
     }
 
 

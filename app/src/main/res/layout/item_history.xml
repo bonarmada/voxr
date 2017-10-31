@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_history_height"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:padding="@dimen/app_padding">
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/emoji"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="8dp" />
+
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/timestamp"
+        style="@style/Base.TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/emoji"
+        android:text="Hest" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/emotion"
         style="@style/Base.TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="Hest" />
+        android:layout_below="@+id/timestamp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/emoji"
+        android:text="Happy" />
 
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="@dimen/item_history_button_dimen"
         android:layout_height="@dimen/item_history_button_dimen"
-        android:src="@drawable/ic_play_arrow_black_24dp"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
+        android:src="@drawable/ic_play_arrow_black_24dp" />
+
 </RelativeLayout>
