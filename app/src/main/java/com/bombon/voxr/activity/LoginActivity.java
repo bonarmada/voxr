@@ -42,6 +42,11 @@ public class LoginActivity extends BaseActivity {
         register();
     }
 
+    @OnClick(R.id.btn_forgot)
+    void fogotOnClick() {
+        forgotPassword();
+    }
+
     @BindView(R.id.btn_login)
     CircularProgressButton btnLogin;
 
@@ -100,6 +105,11 @@ public class LoginActivity extends BaseActivity {
     private void register() {
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
+
+    private void forgotPassword() {
+        startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+    }
+
 
     private void showNetworkError(String e) {
         Util.displayAlert(this, e, null);

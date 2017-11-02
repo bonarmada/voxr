@@ -1,28 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/app_padding"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Base.TextAppearance.AppCompat.Title"
-        android:layout_marginBottom="8dp"
-        android:text="About"/>
+        android:orientation="vertical"
+        android:padding="@dimen/app_padding">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColorSecondary"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:text="Bacon ipsum dolor amet cow shankle burgdoggen, landjaeger ground round jerky pork chop. Pork loin tail shank tri-tip, ball tip pork belly frankfurter. Turkey doner cupim biltong, short loin picanha frankfurter short ribs porchetta pancetta leberkas boudin spare ribs cow. Flank jerky ground round short loin bacon kielbasa strip steak meatloaf swine. Fatback landjaeger ribeye beef ribs sirloin.
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Display1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="EmotiVoice" />
 
-Alcatra beef ribs spare ribs shankle ham hock landjaeger, biltong jerky turkey hamburger bacon. Flank chicken drumstick pork loin, biltong tail picanha ground round. Strip steak meatloaf pastrami turducken pork. Ham hock kielbasa jerky sausage pancetta bresaola. Hamburger cupim chuck, bresaola leberkas filet mignon ground round sirloin beef ribs biltong tongue capicola. Venison bacon fatback tail cow.
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about"
+            android:textColor="?android:textColorSecondary" />
 
-Hamburger pancetta cupim, ham venison beef meatball ground round. Spare ribs flank ball tip alcatra meatball jerky pork belly kevin prosciutto strip steak. Biltong pork loin flank corned beef beef ribs. Capicola short loin hamburger chicken. Fatback ball tip swine bacon hamburger."/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/textColorSecondary"/>
 
-</LinearLayout>
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Display1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Developers" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dev1"
+            android:textColor="?android:textColorSecondary" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info1"
+            android:textColor="?android:textColorSecondary" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/dev2"
+            android:textColor="?android:textColorSecondary" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info2"
+            android:textColor="?android:textColorSecondary" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/dev3"
+            android:textColor="?android:textColorSecondary" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/Base.TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info3"
+            android:textColor="?android:textColorSecondary" />
+
+    </LinearLayout>
+</ScrollView>

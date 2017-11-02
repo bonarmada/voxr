@@ -43,10 +43,19 @@ dependencies {
     compile 'br.com.simplepass:loading-button-android:1.8.1'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
+    compile 'com.github.adrielcafe:AndroidAudioRecorder:0.3.0'
+    compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    compile 'com.github.glomadrian:CodeInput:1.1@aar'
+
+
+    // Utilities
 
     // ExoPLayer
     compile 'com.google.android.exoplayer:exoplayer:r2.5.4'
     compile 'com.google.android.exoplayer:exoplayer-ui:r2.5.4'
+
+    // Permission Wrapper
+    compile 'com.karumi:dexter:4.2.0'
 
 
     /*

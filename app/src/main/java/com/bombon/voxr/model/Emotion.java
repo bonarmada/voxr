@@ -76,7 +76,7 @@ public class Emotion extends RealmObject {
 
     @Override
     public String toString() {
-        return "Emotion{" +
+        return "Password{" +
                 "anger=" + anger +
                 ", fear=" + fear +
                 ", happiness=" + happiness +

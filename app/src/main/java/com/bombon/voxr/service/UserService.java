@@ -5,6 +5,7 @@ import android.util.Log;
 import com.bombon.voxr.common.dagger.remote.UserRemote;
 import com.bombon.voxr.dao.UserDao;
 import com.bombon.voxr.model.User;
+import com.bombon.voxr.model.pojo.Password;
 import com.bombon.voxr.util.ErrorCode;
 import com.bombon.voxr.util.ServiceCallback;
 
@@ -71,13 +72,112 @@ public class UserService {
 
                     @Override
                     public void onSuccess(@NonNull Response<User> response) {
-                        Log.e(TAG, response.code()+"");
+                        Log.e(TAG, response.code() + "");
                         if (response.code() == 201) {
                             callback.onSuccess(response.code(), null);
                             return;
                         }
                         if (response.code() == 409) {
                             callback.onError(ErrorCode.CONFLICT, response.message());
+                            return;
+                        }
+                        if (response.code() == 400) {
+                            callback.onError(ErrorCode.BAD_REQUEST, response.message());
+                            return;
+                        }
+                        if (response.code() == 500) {
+                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                    }
+                });
+    }
+
+    // Password
+    public static void forgot(final Password pass, final ServiceCallback callback) {
+        remote.forgot(pass).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response response) {
+                        Log.e(TAG, response.code() + "");
+                        if (response.code() == 202) {
+                            callback.onSuccess(response.code(), null);
+                            return;
+                        }
+                        if (response.code() == 400) {
+                            callback.onError(ErrorCode.BAD_REQUEST, response.message());
+                            return;
+                        }
+                        if (response.code() == 500) {
+                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                    }
+                });
+    }
+    public static void verify(final Password pass, final ServiceCallback callback) {
+        remote.verify(pass).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response response) {
+                        Log.e(TAG, response.code() + "");
+                        if (response.code() == 200) {
+                            callback.onSuccess(response.code(), null);
+                            return;
+                        }
+                        if (response.code() == 400) {
+                            callback.onError(ErrorCode.BAD_REQUEST, response.message());
+                            return;
+                        }
+                        if (response.code() == 500) {
+                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                    }
+                });
+    }
+
+    public static void reset(final Password pass, final ServiceCallback callback) {
+        remote.reset(pass).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response response) {
+                        Log.e(TAG, response.code() + "");
+                        if (response.code() == 202) {
+                            callback.onSuccess(response.code(), null);
                             return;
                         }
                         if (response.code() == 400) {
@@ -105,9 +205,10 @@ public class UserService {
         return true;
     }
 
-    public static User getLoggedIn(){
+    public static User getLoggedIn() {
         return dao.profile();
     }
+
     public static void logout() {
         dao.clear();
     }

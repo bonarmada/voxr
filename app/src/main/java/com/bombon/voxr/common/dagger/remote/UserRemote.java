@@ -1,6 +1,7 @@
 package com.bombon.voxr.common.dagger.remote;
 
 import com.bombon.voxr.model.User;
+import com.bombon.voxr.model.pojo.Password;
 
 import io.reactivex.Single;
 import retrofit2.Response;
@@ -17,4 +18,15 @@ public interface UserRemote {
 
     @POST("users")
     Single<Response<User>> register(@Body User user);
+
+
+    // Password remote
+    @POST("password/forgot")
+    Single<Response> forgot(@Body Password password);
+
+    @POST("password/verify")
+    Single<Response> reset(@Body Password password);
+
+    @POST("password/reset")
+    Single<Response> verify(@Body Password password);
 }

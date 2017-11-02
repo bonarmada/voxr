@@ -4,4 +4,15 @@
     <string name="drawer_close">Close</string>
 
     <string name="error_field_required">Field Required</string>
+
+    <string name="about">In a dialogue between two people, a correct understanding of each other depends both on their words and tone of their voice. However, because of difficulties on identifying emotions, a correct interpretation of the other person’s emotion often fails. This mobile application of emotion detection voice recognition is to interpret the emotional state of mind behind the voice without having to interpret or even understand the words that are spoken.</string>
+
+
+    //Devlopers
+    <string name="dev1">Ruth Nicole Martinez</string>
+    <string name="dev2">Ma. Regine Gonzales</string>
+    <string name="dev3">Jonas Axalan</string>
+    <string name="info1">63 923 2461</string>
+    <string name="info2">63 917 7445</string>
+    <string name="info3">63 905 0815</string>
 </resources>

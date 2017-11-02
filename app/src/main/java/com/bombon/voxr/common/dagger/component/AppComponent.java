@@ -1,6 +1,7 @@
 package com.bombon.voxr.common.dagger.component;
 
 
+import com.bombon.voxr.activity.ForgotPasswordActivity;
 import com.bombon.voxr.activity.LoginActivity;
 import com.bombon.voxr.activity.RegisterActivity;
 import com.bombon.voxr.common.dagger.module.DaoModule;
@@ -10,6 +11,7 @@ import com.bombon.voxr.common.dagger.scope.AppScope;
 import com.bombon.voxr.fragment.AboutFragment;
 import com.bombon.voxr.fragment.HistoryFragment;
 import com.bombon.voxr.fragment.MainFragment;
+import com.bombon.voxr.fragment.TestFragment;
 
 import dagger.Component;
 
@@ -22,7 +24,9 @@ import dagger.Component;
 
 public interface AppComponent {
     void inject(LoginActivity activity);
+    void inject(ForgotPasswordActivity activity);
     void inject(MainFragment fragment);
+    void inject(TestFragment fragment);
     void inject(RegisterActivity fragment);
     void inject(HistoryFragment fragment);
     void inject(AboutFragment fragment);

@@ -1,5 +1,6 @@
 package com.bombon.voxr.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -22,11 +23,20 @@ import com.bombon.voxr.R;
 import com.bombon.voxr.fragment.AboutFragment;
 import com.bombon.voxr.fragment.HistoryFragment;
 import com.bombon.voxr.fragment.MainFragment;
+import com.bombon.voxr.fragment.TestFragment;
 import com.bombon.voxr.service.UserService;
 import com.bombon.voxr.util.Util;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.DialogOnAnyDeniedMultiplePermissionsListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchAnimListener;
 import com.mahfa.dnswitch.DayNightSwitchListener;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -76,7 +86,28 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setupDrawer();
         setupNavigationView();
 
-        changeFragment(new MainFragment());
+        // Check Permissions
+        setupPermissionWrapper();
+
+        changeFragment(new TestFragment());
+    }
+
+    private void setupPermissionWrapper() {
+        MultiplePermissionsListener dialogMultiplePermissionsListener =
+                DialogOnAnyDeniedMultiplePermissionsListener.Builder
+                        .withContext(this)
+                        .withTitle("Recorder and Storage Permission")
+                        .withMessage("Both audio recorder and storage permission are needed")
+                        .withButtonText(android.R.string.ok)
+                        .withIcon(R.mipmap.ic_launcher)
+                        .build();
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.WAKE_LOCK
+                ).withListener(dialogMultiplePermissionsListener).check();
     }
 
     private void setupToolbar() {
@@ -232,7 +263,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onBackStackChanged() {
         Fragment current = getCurrentFragment();
         Log.e(TAG, current.getClass().getSimpleName());
-        if (current instanceof MainFragment) {
+        if (current instanceof TestFragment) {
             drawerToggle.setDrawerIndicatorEnabled(true);
             navigationView.setCheckedItem(R.id.nav_home);
         } else {
