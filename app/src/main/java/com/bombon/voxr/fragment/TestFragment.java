@@ -69,7 +69,7 @@ public class TestFragment extends Fragment {
                 // Optional
                 .setSource(AudioSource.MIC)
                 .setChannel(AudioChannel.STEREO)
-                .setSampleRate(AudioSampleRate.HZ_16000)
+                .setSampleRate(AudioSampleRate.HZ_44100)
                 .setAutoStart(false)
                 .setKeepDisplayOn(true)
 

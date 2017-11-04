@@ -9,6 +9,8 @@ import com.bombon.voxr.model.pojo.Password;
 import com.bombon.voxr.util.ErrorCode;
 import com.bombon.voxr.util.ServiceCallback;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import io.reactivex.SingleObserver;
@@ -16,6 +18,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Response;
 
 /**
@@ -45,18 +49,24 @@ public class UserService {
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<User> userResponse) {
-                        if (userResponse.code() == 200) {
-                            dao.save(userResponse.body());
-                            callback.onSuccess(userResponse.code(), null);
+                    public void onSuccess(@NonNull Response<User> response) {
+                        Log.e(TAG, response.code() + " " + response.body());
+                        if (response.code() == 200) {
+                            dao.save(response.body());
+                            callback.onSuccess(response.code(), null);
                             return;
                         }
-                        callback.onError(ErrorCode.UNAUTHORIZED, userResponse.message());
+
+                        try {
+                            callback.onError(response.code(), response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                        callback.onError(((HttpException) e).code(), e.getMessage());
                     }
                 });
     }
@@ -72,28 +82,22 @@ public class UserService {
 
                     @Override
                     public void onSuccess(@NonNull Response<User> response) {
-                        Log.e(TAG, response.code() + "");
+                        Log.e(TAG, response.code() + " " + response.body());
                         if (response.code() == 201) {
                             callback.onSuccess(response.code(), null);
                             return;
                         }
-                        if (response.code() == 409) {
-                            callback.onError(ErrorCode.CONFLICT, response.message());
-                            return;
-                        }
-                        if (response.code() == 400) {
-                            callback.onError(ErrorCode.BAD_REQUEST, response.message());
-                            return;
-                        }
-                        if (response.code() == 500) {
-                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
-                            return;
+
+                        try {
+                            callback.onError(response.code(), response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                        callback.onError(((HttpException) e).code(), e.getMessage());
                     }
                 });
     }
@@ -102,64 +106,67 @@ public class UserService {
     public static void forgot(final Password pass, final ServiceCallback callback) {
         remote.forgot(pass).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response>() {
+                .subscribe(new SingleObserver<Response<String>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response response) {
-                        Log.e(TAG, response.code() + "");
+                    public void onSuccess(@NonNull Response<String> response) {
+                        Log.e(TAG, response.code() + " " + response.body());
                         if (response.code() == 202) {
                             callback.onSuccess(response.code(), null);
                             return;
                         }
-                        if (response.code() == 400) {
-                            callback.onError(ErrorCode.BAD_REQUEST, response.message());
+
+                        try {
+                            callback.onError(response.code(), response.errorBody().string());
                             return;
-                        }
-                        if (response.code() == 500) {
-                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
-                            return;
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                        callback.onError(((HttpException) e).code(), e.getMessage());
                     }
                 });
     }
+
     public static void verify(final Password pass, final ServiceCallback callback) {
+        Log.e(TAG, pass.toString());
         remote.verify(pass).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response>() {
+                .subscribe(new SingleObserver<Response<String>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response response) {
-                        Log.e(TAG, response.code() + "");
+                    public void onSuccess(@NonNull Response<String> response) {
+                        Log.e(TAG, response.code() + " " + response.body());
                         if (response.code() == 200) {
                             callback.onSuccess(response.code(), null);
                             return;
                         }
-                        if (response.code() == 400) {
-                            callback.onError(ErrorCode.BAD_REQUEST, response.message());
-                            return;
-                        }
-                        if (response.code() == 500) {
-                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
-                            return;
+
+                        try {
+                            callback.onError(response.code(), response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                        if (e instanceof HttpException) {
+                            callback.onError(((HttpException) e).code(), e.getMessage());
+                            return;
+                        }
+                        callback.onError(0, e.getMessage());
                     }
                 });
     }
@@ -167,36 +174,33 @@ public class UserService {
     public static void reset(final Password pass, final ServiceCallback callback) {
         remote.reset(pass).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response>() {
+                .subscribe(new SingleObserver<Response<String>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response response) {
-                        Log.e(TAG, response.code() + "");
+                    public void onSuccess(@NonNull Response<String> response) {
+                        Log.e(TAG, response.code() + " " + response.body());
                         if (response.code() == 202) {
                             callback.onSuccess(response.code(), null);
                             return;
                         }
-                        if (response.code() == 400) {
-                            callback.onError(ErrorCode.BAD_REQUEST, response.message());
-                            return;
-                        }
-                        if (response.code() == 500) {
-                            callback.onError(ErrorCode.SERVICE_UNAVAILABLE, response.message());
-                            return;
+
+                        try {
+                            callback.onError(response.code(), response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(ErrorCode.SERVICE_UNAVAILABLE, e.getMessage());
+                        callback.onError(((HttpException) e).code(), e.getMessage());
                     }
                 });
     }
-
 
 
     public static boolean isLoggedIn() {

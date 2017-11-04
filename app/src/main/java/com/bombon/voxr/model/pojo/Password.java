@@ -14,7 +14,7 @@ public class Password{
 
     @SerializedName("code")
     @Expose
-    private Integer code;
+    private String code;
     @SerializedName("email")
     @Expose
     private String email;
@@ -22,11 +22,11 @@ public class Password{
     @Expose
     private String password;
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -49,7 +49,7 @@ public class Password{
     @Override
     public String toString() {
         return "Password{" +
-                "code=" + code +
+                "code='" + code + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

@@ -37,7 +37,7 @@ public class NetworkModule {
             public void log(String message) {
                 Timber.tag("OkHttp").d(message);
             }
-        }).setLevel(HttpLoggingInterceptor.Level.BASIC);
+        }).setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
 

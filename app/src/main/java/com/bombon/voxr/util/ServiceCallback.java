@@ -6,5 +6,5 @@ package com.bombon.voxr.util;
 
 public interface ServiceCallback<T> {
     void onSuccess(int statusCode, T result);
-    void onError(ErrorCode code, String message);
+    void onError(int statusCode, String message);
 }

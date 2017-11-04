@@ -201,7 +201,7 @@ public class HistoryFragment extends Fragment implements HistoryAdapter.HistoryA
             }
 
             @Override
-            public void onError(ErrorCode code, String message) {
+            public void onError(int code, String message) {
 
             }
 

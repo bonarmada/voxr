@@ -92,7 +92,7 @@ public class RegisterActivity extends BaseActivity {
             }
 
             @Override
-            public void onError(ErrorCode code, String message) {
+            public void onError(int code, String message) {
                 btnRegister.revertAnimation();
                 Timber.tag(TAG).d(message);
                 showNetworkError(message);

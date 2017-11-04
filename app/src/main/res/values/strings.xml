@@ -3,7 +3,8 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
-    <string name="error_field_required">Field Required</string>
+    <string name="error_field_required">Field required</string>
+    <string name="error_password_not_match">Password not matched</string>
 
     <string name="about">In a dialogue between two people, a correct understanding of each other depends both on their words and tone of their voice. However, because of difficulties on identifying emotions, a correct interpretation of the other person’s emotion often fails. This mobile application of emotion detection voice recognition is to interpret the emotional state of mind behind the voice without having to interpret or even understand the words that are spoken.</string>
 
