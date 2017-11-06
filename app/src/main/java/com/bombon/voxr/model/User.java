@@ -87,6 +87,10 @@ public class User extends RealmObject {
         this.username = username;
     }
 
+    public String getName(){
+        return firstName  + " " + lastName;
+    }
+
     @Override
     public String toString() {
         return "User{" +

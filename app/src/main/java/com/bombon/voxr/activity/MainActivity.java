@@ -24,6 +24,7 @@ import com.bombon.voxr.fragment.AboutFragment;
 import com.bombon.voxr.fragment.HistoryFragment;
 import com.bombon.voxr.fragment.MainFragment;
 import com.bombon.voxr.fragment.TestFragment;
+import com.bombon.voxr.model.User;
 import com.bombon.voxr.service.UserService;
 import com.bombon.voxr.util.Util;
 import com.karumi.dexter.Dexter;
@@ -73,6 +74,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        // Dagger init
+        getComponent().inject(this);
 
         //Backstack manager
         this.getSupportFragmentManager().addOnBackStackChangedListener(this);
@@ -152,6 +156,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // Navigation View Holder
         View header = navigationView.getHeaderView(0);
         headerViewHolder = new HeaderViewHolder(header);
+
+        // Fill data to UI
+        User user = userService.getLoggedIn();
+        headerViewHolder.tvName.setText(user.getName());
+        headerViewHolder.tvUsername.setText(user.getUsername());
 
         // Navigation Dark Mode Toggle
         int currentNightMode = getResources().getConfiguration().uiMode
