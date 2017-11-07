@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Voxr</string>
+    <string name="app_name">EmotiVoice</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
@@ -16,4 +16,10 @@
     <string name="info1">63 923 2461</string>
     <string name="info2">63 917 7445</string>
     <string name="info3">63 905 0815</string>
+
+    //Progress state
+    <string name="emotion_processing">Processing audio, this may take a while...</string>
+    <string name="emotion_finished">The emotion recorded on our app is</string>
+    <string name="emotion_error">Oops.</string>
+    <string name="emotion_message">We\'re sorry, something went wrong</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.bombon.voxr.R;
 import com.bombon.voxr.model.User;
@@ -12,6 +13,7 @@ import com.bombon.voxr.service.UserService;
 import com.bombon.voxr.util.ErrorCode;
 import com.bombon.voxr.util.ServiceCallback;
 import com.bombon.voxr.util.Util;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -47,6 +49,9 @@ public class LoginActivity extends BaseActivity {
         forgotPassword();
     }
 
+    @BindView(R.id.background)
+    ImageView ivBackground;
+
     @BindView(R.id.btn_login)
     CircularProgressButton btnLogin;
 
@@ -71,7 +76,11 @@ public class LoginActivity extends BaseActivity {
         // Stuffs
         if (userService.isLoggedIn())
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+        Picasso.with(this).load(R.drawable.blr2).fit().into(ivBackground);
     }
+
+
 
     private void login() {
         if (!isValid())

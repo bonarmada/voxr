@@ -29,6 +29,10 @@ import butterknife.OnClick;
 public class ForgotPasswordActivity extends BaseActivity {
     private static final String TAG = ForgotPasswordActivity.class.getSimpleName();
 
+    // constants
+    private static final int STATE_EMAIL_VERIFIED = 1;
+    private static final int STATE_CODE_VERIFIED = 2;
+
     @Inject
     UserService userService;
 
@@ -73,10 +77,6 @@ public class ForgotPasswordActivity extends BaseActivity {
     void resetOnClick() {
         resetPassword();
     }
-
-    // constants
-    private static final int STATE_EMAIL_VERIFIED = 1;
-    private static final int STATE_CODE_VERIFIED = 2;
 
     private Password password = new Password();
 

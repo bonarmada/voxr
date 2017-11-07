@@ -66,7 +66,11 @@ public class UserService {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(((HttpException) e).code(), e.getMessage());
+                        if (e instanceof HttpException) {
+                            callback.onError(((HttpException) e).code(), e.getMessage());
+                            return;
+                        }
+                        callback.onError(0, e.getMessage());
                     }
                 });
     }
@@ -97,7 +101,11 @@ public class UserService {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(((HttpException) e).code(), e.getMessage());
+                        if (e instanceof HttpException) {
+                            callback.onError(((HttpException) e).code(), e.getMessage());
+                            return;
+                        }
+                        callback.onError(0, e.getMessage());
                     }
                 });
     }
@@ -130,7 +138,11 @@ public class UserService {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        callback.onError(((HttpException) e).code(), e.getMessage());
+                        if (e instanceof HttpException) {
+                            callback.onError(((HttpException) e).code(), e.getMessage());
+                            return;
+                        }
+                        callback.onError(0, e.getMessage());
                     }
                 });
     }

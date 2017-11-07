@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:background="#FFF"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg_lh" />
+        android:rotation="180"
+        android:src="@drawable/blr2" />
 
     <LinearLayout
         android:layout_width="match_parent"

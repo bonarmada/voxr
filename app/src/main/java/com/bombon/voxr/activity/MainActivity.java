@@ -80,11 +80,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         //Backstack manager
         this.getSupportFragmentManager().addOnBackStackChangedListener(this);
+
+        changeFragment(new TestFragment());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.e(TAG, "hi");
 
         setupToolbar();
         setupDrawer();
@@ -93,7 +96,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // Check Permissions
         setupPermissionWrapper();
 
-        changeFragment(new TestFragment());
     }
 
     private void setupPermissionWrapper() {
@@ -116,6 +118,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
